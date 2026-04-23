@@ -1,4 +1,5 @@
 import { SlimeEnemyConfig } from '../config/SlimeEnemyConfig.js';
+import { MiniHealthBar } from '../ui/HealthBar.js';
 
 /**
  * Slime2-Gegner: verfolgt den Spieler, greift in Reichweite an (Schaden über Callback).
@@ -36,6 +37,10 @@ export class SlimeEnemy {
     this.sprite = sprite;
 
     scene.physics.add.collider(sprite, collisionLayer);
+
+    this._hpBar = new MiniHealthBar(scene, 42, 8, 2);
+    this._hpBar.setHp(this.hp, this.cfg.maxHp);
+    this._hpBarGap = 3;
 
     this._registerAnimations();
     sprite.anims.play(this.cfg.anims.idle.down, true);
@@ -179,6 +184,7 @@ export class SlimeEnemy {
     }
     this._dead = true;
     this._hurting = false;
+    this._hpBar?.setVisible(false);
     this._cancelAttackSchedule();
     this.sprite.removeAllListeners('animationcomplete');
     this.sprite.setVelocity(0, 0);
@@ -206,6 +212,7 @@ export class SlimeEnemy {
       return;
     }
     this.hp = Math.max(0, this.hp - amount);
+    this._hpBar?.setHp(this.hp, this.cfg.maxHp);
     if (this.hp <= 0) {
       this.triggerDeath();
     } else {
@@ -222,6 +229,13 @@ export class SlimeEnemy {
     if (this._dead) {
       return;
     }
+
+    const b = this.sprite.getBounds();
+    this._hpBar.setPosition(
+      b.centerX,
+      b.top - this._hpBarGap - this._hpBar.barH * 0.5
+    );
+
     if (playerIsDead) {
       this.sprite.setVelocity(0, 0);
       if (!this._hurting && !this._attacking) {

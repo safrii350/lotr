@@ -46,7 +46,10 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.setZoom(1);
 
     this.playerHp = { current: 100, max: 100 };
-    this.healthBar = new HealthBar(this, 10, 10, 220, 28);
+    this.healthBar = new HealthBar(this, 10, 10, 152, 16, {
+      borderW: 2,
+      fontSize: '11px',
+    });
 
     this._playerHitSlimeThisSwing = false;
 
