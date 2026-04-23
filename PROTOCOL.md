@@ -35,6 +35,11 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 - `js/scenes/GameScene.js` — Map, Spieler, Kamera, Collider.
 - `README.md`, `TODO.md` — Dokumentation und Roadmap.
 
+### Hotfix: Spieler-Animation
+
+- **Problem:** `setTexture(walk)` wurde **jedes Frame** während der Bewegung aufgerufen; Phaser setzt die laufende Animation dabei zurück → Walk/Idle wirkten „eingefroren“ auf Frame 0.
+- **Lösung:** `setTexture` nur beim Wechsel **idle ↔ walk**; Animation nur bei Moduswechsel oder **Richtungswechsel** mit `play(key, false)` neu starten, sonst `play(key, true)` (kein Zurücksetzen des Frame-Zählers).
+
 ### Nächste sinnvolle Schritte (kurz)
 
 - Audio, UI-HUD im Wii-Rahmen, Speicherstände.

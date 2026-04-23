@@ -22,6 +22,8 @@ export class PlayerController {
     this.idleKey = idleKey;
     this.walkKey = walkKey;
     this._lastDir = 'down';
+    /** @type {'idle' | 'walk'} */
+    this._locomotion = 'idle';
     this._registerAnimations();
     sprite.anims.play(PlayerVisualConfig.anims.idle.down, true);
   }
@@ -91,17 +93,43 @@ export class PlayerController {
     const moving = vx !== 0 || vy !== 0;
     const cfg = PlayerVisualConfig;
 
+    let dir = this._lastDir;
     if (moving) {
       if (Math.abs(vx) > Math.abs(vy)) {
-        this._lastDir = vx > 0 ? 'right' : 'left';
+        dir = vx > 0 ? 'right' : 'left';
       } else {
-        this._lastDir = vy > 0 ? 'down' : 'up';
+        dir = vy > 0 ? 'down' : 'up';
       }
-      this.sprite.setTexture(this.walkKey);
-      this.sprite.anims.play(cfg.anims.walk[this._lastDir], true);
-    } else {
-      this.sprite.setTexture(this.idleKey);
-      this.sprite.anims.play(cfg.anims.idle[this._lastDir], true);
     }
+
+    if (moving) {
+      const enterWalk = this._locomotion !== 'walk';
+      if (enterWalk) {
+        this.sprite.setTexture(this.walkKey);
+        this._locomotion = 'walk';
+      }
+      const walkKeyName = cfg.anims.walk[dir];
+      const dirChanged = dir !== this._lastDir;
+      if (enterWalk || dirChanged) {
+        this.sprite.anims.play(walkKeyName, false);
+      } else {
+        this.sprite.anims.play(walkKeyName, true);
+      }
+    } else {
+      const enterIdle = this._locomotion !== 'idle';
+      if (enterIdle) {
+        this.sprite.setTexture(this.idleKey);
+        this._locomotion = 'idle';
+      }
+      const idleKeyName = cfg.anims.idle[dir];
+      const dirChanged = dir !== this._lastDir;
+      if (enterIdle || dirChanged) {
+        this.sprite.anims.play(idleKeyName, false);
+      } else {
+        this.sprite.anims.play(idleKeyName, true);
+      }
+    }
+
+    this._lastDir = dir;
   }
 }

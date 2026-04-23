@@ -26,8 +26,8 @@ export const PlayerVisualConfig = Object.freeze({
     },
   },
   /**
-   * Zeilen-Index pro logischer Richtung (0 = erste Zeile im Sheet).
-   * Bei neuem Asset ggf. permutieren.
+   * Zeilen im Sheet (Walk 384×256, Idle 768×256): Zeile 0 = zur Kamera / „down“,
+   * 1 = links, 2 = rechts, 3 = von der Kamera weg / „up“.
    */
   DIRECTION_ROW_INDEX: Object.freeze({
     down: 0,
