@@ -7,26 +7,53 @@
     <link rel="stylesheet" href="css/wii-frame.css" />
   </head>
   <body>
-    <div class="wii-page">
-      <header class="wii-header">
-        <span class="wii-channel-label">Kanal</span>
-        <h1 class="wii-title">Cyber-Nexus-Proto</h1>
-        <span class="wii-hint">WASD · Pfeiltasten</span>
+    <div class="wii-shell">
+      <div class="wii-bg-glow" aria-hidden="true"></div>
+
+      <header class="wii-top">
+        <p class="wii-top-hint">WASD · Pfeiltasten</p>
       </header>
 
-      <main class="wii-console">
-        <div class="wii-bezel">
-          <div class="wii-power-led" aria-hidden="true"></div>
-          <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
+      <main class="wii-main">
+        <div class="wii-channel-frame" aria-label="Spielfenster">
+          <div class="wii-channel-gloss" aria-hidden="true"></div>
+          <div class="wii-channel-inner">
+            <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
+          </div>
         </div>
       </main>
 
-      <footer class="wii-footer">
-        <p class="wii-footer-text">800 × 600 · Phaser 3 · Top-Down-Prototyp</p>
+      <footer class="wii-dock">
+        <div class="wii-dock-inner">
+          <div class="wii-dock-buttons" role="toolbar" aria-label="Baustellen-Hinweise">
+            <span class="wii-orb" title="Under construction">🚧</span>
+            <span class="wii-orb" title="Under construction">🏗️</span>
+            <span class="wii-orb" title="Under construction">👷</span>
+            <span class="wii-orb" title="Under construction">🔧</span>
+            <span class="wii-orb" title="Under construction">⚠️</span>
+          </div>
+          <time class="wii-clock" id="wii-clock" datetime="">--:--</time>
+        </div>
       </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const clockEl = document.getElementById('wii-clock');
+        if (!clockEl) return;
+        const tick = () => {
+          const now = new Date();
+          clockEl.textContent = now.toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          clockEl.dateTime = now.toISOString();
+        };
+        tick();
+        setInterval(tick, 1000);
+      });
+    </script>
   </body>
 </html>
