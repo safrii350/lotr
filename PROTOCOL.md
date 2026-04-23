@@ -4,6 +4,14 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — Steuerung als Wii-Systemmeldung
+
+**Entscheidung:** Steuerungshinweise in einem **eigenen Panel rechts** neben dem Spiel. Optik angelehnt an Wii-Systemdialoge: stark abgerundeter Kasten, radialer/linearer Gloss, **Pill-Header „Steuerung“** mit **Cyan-Rand** und Glow — **ohne** unteren Action-Button. Inhalt: WASD, Pfeiltasten, Diagonal-Hinweis; `<aside>` + Überschrift für Barrierefreiheit.
+
+**Dateien:** `index.html` (`.wii-stage-row`, `.wii-system-msg`), `css/wii-frame.css` (Panel-, Pill-, `kbd`-Styles; Dock `max-width` 980px; unter 960px Spaltenlayout).
+
+---
+
 ## 2026-04-23 — Spielfenster 592×480
 
 **Entscheidung:** Phaser-Canvas und `.wii-screen` von **800×600** auf **592×480** verkleinert (`GameConfig.js`, `css/wii-frame.css`). README angepasst. Breakpoint für horizontales Scrollen der Shell: ~640px Breite.

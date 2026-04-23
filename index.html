@@ -10,16 +10,40 @@
     <div class="wii-shell">
       <div class="wii-bg-glow" aria-hidden="true"></div>
 
-      <header class="wii-top">
-        <p class="wii-top-hint">WASD · Pfeiltasten</p>
-      </header>
-
       <main class="wii-main">
-        <div class="wii-channel-frame" aria-label="Spielfenster">
-          <div class="wii-channel-gloss" aria-hidden="true"></div>
-          <div class="wii-channel-inner">
-            <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
+        <div class="wii-stage-row">
+          <div class="wii-channel-frame" aria-label="Spielfenster">
+            <div class="wii-channel-gloss" aria-hidden="true"></div>
+            <div class="wii-channel-inner">
+              <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
+            </div>
           </div>
+
+          <aside class="wii-system-msg" aria-labelledby="wii-controls-heading">
+            <div class="wii-system-msg-inner">
+              <div class="wii-msg-header-pill">
+                <h2 id="wii-controls-heading" class="wii-msg-header-text">Steuerung</h2>
+              </div>
+              <div class="wii-msg-body">
+                <p class="wii-msg-lead">So bewegst du die Figur:</p>
+                <ul class="wii-msg-list">
+                  <li>
+                    <kbd class="wii-kbd">W</kbd>
+                    <kbd class="wii-kbd">A</kbd>
+                    <kbd class="wii-kbd">S</kbd>
+                    <kbd class="wii-kbd">D</kbd>
+                    <span class="wii-msg-desc">Laufen</span>
+                  </li>
+                  <li>
+                    <span class="wii-msg-desc">oder Pfeiltasten</span>
+                  </li>
+                  <li>
+                    <span class="wii-msg-desc">Zwei Richtungen gleichzeitig für diagonal</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
         </div>
       </main>
 
