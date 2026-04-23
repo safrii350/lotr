@@ -40,6 +40,14 @@ export class BootScene extends Phaser.Scene {
       frameWidth,
       frameHeight,
     });
+    this.load.spritesheet(AssetKeys.playerHurt, paths.hurt, {
+      frameWidth,
+      frameHeight,
+    });
+    this.load.spritesheet(AssetKeys.playerDeath, paths.death, {
+      frameWidth,
+      frameHeight,
+    });
   }
 
   create() {

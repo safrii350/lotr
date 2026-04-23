@@ -12,6 +12,8 @@ export const PlayerVisualConfig = Object.freeze({
   attackFile: 'Swordsman_lvl1_attack_with_shadow.png',
   runAttackFile: 'Swordsman_lvl1_Run_Attack_with_shadow.png',
   walkAttackFile: 'Swordsman_lvl1_Walk_Attack_with_shadow.png',
+  hurtFile: 'Swordsman_lvl1_Hurt_with_shadow.png',
+  deathFile: 'Swordsman_lvl1_Death_with_shadow.png',
   frameWidth: 64,
   frameHeight: 64,
   /** Phaser-Animations-Keys — unverändert lassen, wenn nur Texturen getauscht werden */
@@ -52,10 +54,22 @@ export const PlayerVisualConfig = Object.freeze({
       right: 'player-walk-attack-right',
       up: 'player-walk-attack-up',
     },
+    hurt: {
+      down: 'player-hurt-down',
+      left: 'player-hurt-left',
+      right: 'player-hurt-right',
+      up: 'player-hurt-up',
+    },
+    death: {
+      down: 'player-death-down',
+      left: 'player-death-left',
+      right: 'player-death-right',
+      up: 'player-death-up',
+    },
   },
   /**
    * Zeilen: 0 = zur Kamera / „down“, 1 = links, 2 = rechts, 3 = weg / „up“.
-   * Walk/Walk+Attack 384×256 → je 6 Frames/Zeile. Run/Attack/Run+Attack 512×256 → 8/Zeile.
+   * Hurt 320×256 → 5/Zeile. Death 448×256 → 7/Zeile.
    */
   DIRECTION_ROW_INDEX: Object.freeze({
     down: 0,
@@ -69,11 +83,15 @@ export const PlayerVisualConfig = Object.freeze({
   attackFrameCount: 8,
   runAttackFrameCount: 8,
   walkAttackFrameCount: 6,
+  hurtFrameCount: 5,
+  deathFrameCount: 7,
   walkFrameRate: 10,
   runFrameRate: 12,
   attackFrameRate: 14,
   runAttackFrameRate: 14,
   walkAttackFrameRate: 12,
+  hurtFrameRate: 14,
+  deathFrameRate: 10,
   idleFrameRate: 8,
   movementSpeed: 140,
   runSpeed: 250,
@@ -88,6 +106,8 @@ export function getPlayerTexturePaths() {
     attackFile,
     runAttackFile,
     walkAttackFile,
+    hurtFile,
+    deathFile,
   } = PlayerVisualConfig;
   return {
     idle: `${basePath}/${idleFile}`,
@@ -96,5 +116,7 @@ export function getPlayerTexturePaths() {
     attack: `${basePath}/${attackFile}`,
     runAttack: `${basePath}/${runAttackFile}`,
     walkAttack: `${basePath}/${walkAttackFile}`,
+    hurt: `${basePath}/${hurtFile}`,
+    death: `${basePath}/${deathFile}`,
   };
 }

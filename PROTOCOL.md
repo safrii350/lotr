@@ -4,6 +4,20 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — Hurt & Death (Sprites + API)
+
+**Entscheidung:** `Swordsman_lvl1_Hurt_with_shadow.png` (320×256, **5** Frames/Zeile), `Swordsman_lvl1_Death_with_shadow.png` (448×256, **7** Frames/Zeile), gleiche 4 Richtungen. `triggerHurt()` (kurz, stehend, blockiert nicht Tod; **nicht** während `_attacking`), `triggerDeath()` (entfernt `animationcomplete`-Listener, bricht Zustände ab, Ende: `anims.pause()`). Prototyp-Tasten **H** / **J** in `GameScene`. Getter `isDead`.
+
+**Dateien:** `PlayerVisualConfig.js`, `AssetKeys.js`, `BootScene.js`, `GameScene.js`, `PlayerController.js`, `README.md`.
+
+---
+
+## 2026-04-23 — Bewegung während Walk-/Run-Attack
+
+**Problem:** `update()` setzte bei jedem Angriff `velocity = 0` und beendete früh — Walk-/Run-Attack wirkten wie „Einfrieren“. **Lösung:** Nur bei **`_locomotion === 'attack'`** (stehend) weiter Stopp; bei **`walkAttack` / `runAttack`** dieselbe Eingabe wie normal → `setVelocity(vx * speed)` (Walk- vs. Run-Tempo via Shift). Kein `setVelocity(0)` mehr in `_beginWalkAttack` / `_beginRunAttack`.
+
+---
+
 ## 2026-04-23 — Walk + Attack (E beim Gehen)
 
 **Entscheidung:** `Swordsman_lvl1_Walk_Attack_with_shadow.png` (384×256, **6** Frames/Zeile wie Walk). **E** bei **Bewegung ohne Shift** → `_beginWalkAttack`; Priorität: Rennen (`Shift`) > Gehen > stehend.

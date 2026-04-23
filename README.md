@@ -30,7 +30,8 @@ Dann im Browser die angezeigte URL öffnen (z. B. `http://localhost:3000`).
 
 - **WASD** oder **Pfeiltasten** — achtparallele Bewegung mit normalisierten Diagonalen.
 - **Umschalttaste (Shift)** gedrückt halten + Richtung — **Rennen** (anderes Sprite, höhere Geschwindigkeit).
-- **E** — **Angriff** (einmal abspielen, bis dahin keine Bewegung). **Stehend** → Idle-Attack (8 Frames). **Gehen** (ohne Shift) → Walk-Attack, 384×256, 6 Frames/Zeile (`Swordsman_lvl1_Walk_Attack_with_shadow.png`). **Rennen** (Shift + Bewegung) → Run-Attack (8 Frames). Blickrichtung wie bei der Bewegung bzw. zuletzt idle.
+- **E** — **Angriff** (einmal abspielen). **Stehend:** keine Bewegung während der Animation. **Gehen / Rennen:** Walk- bzw. Run-Attack-Sprite, du kannst **weiterlaufen oder rennen** (Geschwindigkeit wie ohne Angriff, inkl. Shift). Varianten: Idle-Attack (8 Frames), Walk-Attack 384×256 / 6 Frames, Run-Attack (8 Frames).
+- **H** / **J** — Prototyp-Test: **Hurt** (320×256, 5 Frames/Zeile) bzw. **Death** (448×256, 7 Frames/Zeile); in der Szene auch `player.triggerHurt()` / `triggerDeath()` nutzbar. Tod bricht Steuerung ab und hält das letzte Frame; kein Respawn in dieser Szene.
 
 ## Karte & Kollision
 

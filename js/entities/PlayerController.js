@@ -3,7 +3,9 @@ import { PlayerVisualConfig } from '../config/PlayerVisualConfig.js';
 /**
  * Steuert Bewegung (Arcade-Body) und Richtungs-Animationen für den Spieler.
  * Shift + Richtung = Rennen.
- * E: stehend | Gehen (ohne Shift) = Walk-Attack | Rennen (Shift) = Run-Attack.
+ * E: stehend | Gehen = Walk-Attack | Rennen (Shift) = Run-Attack.
+ * Walk-/Run-Attack: beweglich; stehender Angriff stoppt.
+ * triggerHurt / triggerDeath: für Kampflogik (Szene kann auch Tasten binden).
  */
 export class PlayerController {
   /**
@@ -16,6 +18,8 @@ export class PlayerController {
    * @param {string} attackKey
    * @param {string} runAttackKey
    * @param {string} walkAttackKey
+   * @param {string} hurtKey
+   * @param {string} deathKey
    */
   constructor(
     scene,
@@ -26,7 +30,9 @@ export class PlayerController {
     runKey,
     attackKey,
     runAttackKey,
-    walkAttackKey
+    walkAttackKey,
+    hurtKey,
+    deathKey
   ) {
     this.scene = scene;
     const sprite = scene.physics.add.sprite(x, y, idleKey);
@@ -41,12 +47,20 @@ export class PlayerController {
     this.attackKey = attackKey;
     this.runAttackKey = runAttackKey;
     this.walkAttackKey = walkAttackKey;
+    this.hurtKey = hurtKey;
+    this.deathKey = deathKey;
     this._lastDir = 'down';
-    /** @type {'idle' | 'walk' | 'run' | 'attack' | 'runAttack' | 'walkAttack'} */
+    /** @type {'idle' | 'walk' | 'run' | 'attack' | 'runAttack' | 'walkAttack' | 'hurt' | 'death'} */
     this._locomotion = 'idle';
     this._attacking = false;
+    this._hurting = false;
+    this._dead = false;
     this._registerAnimations();
     sprite.anims.play(PlayerVisualConfig.anims.idle.down, true);
+  }
+
+  get isDead() {
+    return this._dead;
   }
 
   _registerAnimations() {
@@ -60,6 +74,8 @@ export class PlayerController {
       const attackKeyName = cfg.anims.attack[dir];
       const runAttackKeyName = cfg.anims.runAttack[dir];
       const walkAttackKeyName = cfg.anims.walkAttack[dir];
+      const hurtKeyName = cfg.anims.hurt[dir];
+      const deathKeyName = cfg.anims.death[dir];
 
       if (!this.scene.anims.exists(idleKeyName)) {
         this.scene.anims.create({
@@ -132,7 +148,89 @@ export class PlayerController {
           repeat: 0,
         });
       }
+
+      if (!this.scene.anims.exists(hurtKeyName)) {
+        this.scene.anims.create({
+          key: hurtKeyName,
+          frames: this.scene.anims.generateFrameNumbers(this.hurtKey, {
+            start: row * cfg.hurtFrameCount,
+            end: row * cfg.hurtFrameCount + cfg.hurtFrameCount - 1,
+          }),
+          frameRate: cfg.hurtFrameRate,
+          repeat: 0,
+        });
+      }
+
+      if (!this.scene.anims.exists(deathKeyName)) {
+        this.scene.anims.create({
+          key: deathKeyName,
+          frames: this.scene.anims.generateFrameNumbers(this.deathKey, {
+            start: row * cfg.deathFrameCount,
+            end: row * cfg.deathFrameCount + cfg.deathFrameCount - 1,
+          }),
+          frameRate: cfg.deathFrameRate,
+          repeat: 0,
+        });
+      }
     }
+  }
+
+  /**
+   * Kurze Trefferanimation (stehend), danach Idle. Kein Start während Angriff.
+   */
+  triggerHurt() {
+    const cfg = PlayerVisualConfig;
+    if (this._dead || this._hurting || this._attacking) {
+      return;
+    }
+    this._hurting = true;
+    this.sprite.setVelocity(0, 0);
+    this.sprite.setTexture(this.hurtKey);
+    this._locomotion = 'hurt';
+
+    const animKey = cfg.anims.hurt[this._lastDir];
+    this.sprite.anims.play(animKey, false);
+
+    this.sprite.once('animationcomplete', (anim) => {
+      if (anim.key !== animKey) {
+        return;
+      }
+      if (this._dead) {
+        return;
+      }
+      this._hurting = false;
+      this.sprite.setTexture(this.idleKey);
+      this._locomotion = 'idle';
+      this.sprite.anims.play(cfg.anims.idle[this._lastDir], false);
+    });
+  }
+
+  /**
+   * Tod: bricht alles ab, letztes Frame bleibt stehen (kein Respawn in dieser Szene).
+   */
+  triggerDeath() {
+    const cfg = PlayerVisualConfig;
+    if (this._dead) {
+      return;
+    }
+    this._dead = true;
+    this._hurting = false;
+    this._attacking = false;
+    this.sprite.setVelocity(0, 0);
+    this.sprite.removeAllListeners('animationcomplete');
+
+    this.sprite.setTexture(this.deathKey);
+    this._locomotion = 'death';
+
+    const animKey = cfg.anims.death[this._lastDir];
+    this.sprite.anims.play(animKey, false);
+
+    this.sprite.once('animationcomplete', (anim) => {
+      if (anim.key !== animKey) {
+        return;
+      }
+      this.sprite.anims.pause();
+    });
   }
 
   /**
@@ -153,6 +251,9 @@ export class PlayerController {
       if (anim.key !== animKey) {
         return;
       }
+      if (this._dead) {
+        return;
+      }
       this._attacking = false;
       this.sprite.setTexture(this.idleKey);
       this._locomotion = 'idle';
@@ -167,7 +268,6 @@ export class PlayerController {
     const cfg = PlayerVisualConfig;
     this._attacking = true;
     this._lastDir = dir;
-    this.sprite.setVelocity(0, 0);
     this.sprite.setTexture(this.runAttackKey);
     this._locomotion = 'runAttack';
 
@@ -176,6 +276,9 @@ export class PlayerController {
 
     this.sprite.once('animationcomplete', (anim) => {
       if (anim.key !== animKey) {
+        return;
+      }
+      if (this._dead) {
         return;
       }
       this._attacking = false;
@@ -192,7 +295,6 @@ export class PlayerController {
     const cfg = PlayerVisualConfig;
     this._attacking = true;
     this._lastDir = dir;
-    this.sprite.setVelocity(0, 0);
     this.sprite.setTexture(this.walkAttackKey);
     this._locomotion = 'walkAttack';
 
@@ -201,6 +303,9 @@ export class PlayerController {
 
     this.sprite.once('animationcomplete', (anim) => {
       if (anim.key !== animKey) {
+        return;
+      }
+      if (this._dead) {
         return;
       }
       this._attacking = false;
@@ -219,7 +324,12 @@ export class PlayerController {
   update(cursors, wasd, shiftKey, eKey) {
     const cfg = PlayerVisualConfig;
 
-    if (this._attacking) {
+    if (this._dead) {
+      this.sprite.setVelocity(0, 0);
+      return;
+    }
+
+    if (this._hurting) {
       this.sprite.setVelocity(0, 0);
       return;
     }
@@ -255,6 +365,19 @@ export class PlayerController {
     }
 
     const wantsRun = shiftKey.isDown && moving;
+    const speed = wantsRun ? cfg.runSpeed : cfg.movementSpeed;
+
+    if (this._attacking) {
+      if (this._locomotion === 'attack') {
+        this.sprite.setVelocity(0, 0);
+        return;
+      }
+      this.sprite.setVelocity(vx * speed, vy * speed);
+      if (moving) {
+        this._lastDir = dir;
+      }
+      return;
+    }
 
     if (Phaser.Input.Keyboard.JustDown(eKey)) {
       if (wantsRun) {
@@ -266,8 +389,6 @@ export class PlayerController {
       }
       return;
     }
-
-    const speed = wantsRun ? cfg.runSpeed : cfg.movementSpeed;
 
     this.sprite.setVelocity(vx * speed, vy * speed);
 

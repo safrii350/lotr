@@ -7,4 +7,6 @@ export const AssetKeys = Object.freeze({
   playerAttack: 'player-attack',
   playerRunAttack: 'player-run-attack',
   playerWalkAttack: 'player-walk-attack',
+  playerHurt: 'player-hurt',
+  playerDeath: 'player-death',
 });
