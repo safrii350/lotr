@@ -4,6 +4,10 @@ import {
   getPlayerTexturePaths,
   PlayerVisualConfig,
 } from '../config/PlayerVisualConfig.js';
+import {
+  getSlimeTexturePaths,
+  SlimeEnemyConfig,
+} from '../config/SlimeEnemyConfig.js';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -47,6 +51,34 @@ export class BootScene extends Phaser.Scene {
     this.load.spritesheet(AssetKeys.playerDeath, paths.death, {
       frameWidth,
       frameHeight,
+    });
+
+    const slimePaths = getSlimeTexturePaths();
+    const sf = SlimeEnemyConfig.frameWidth;
+    const sh = SlimeEnemyConfig.frameHeight;
+    this.load.spritesheet(AssetKeys.slime2Idle, slimePaths.idle, {
+      frameWidth: sf,
+      frameHeight: sh,
+    });
+    this.load.spritesheet(AssetKeys.slime2Walk, slimePaths.walk, {
+      frameWidth: sf,
+      frameHeight: sh,
+    });
+    this.load.spritesheet(AssetKeys.slime2Run, slimePaths.run, {
+      frameWidth: sf,
+      frameHeight: sh,
+    });
+    this.load.spritesheet(AssetKeys.slime2Attack, slimePaths.attack, {
+      frameWidth: sf,
+      frameHeight: sh,
+    });
+    this.load.spritesheet(AssetKeys.slime2Hurt, slimePaths.hurt, {
+      frameWidth: sf,
+      frameHeight: sh,
+    });
+    this.load.spritesheet(AssetKeys.slime2Death, slimePaths.death, {
+      frameWidth: sf,
+      frameHeight: sh,
     });
   }
 

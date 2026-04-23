@@ -63,6 +63,10 @@ export class PlayerController {
     return this._dead;
   }
 
+  get isAttacking() {
+    return this._attacking;
+  }
+
   _registerAnimations() {
     const cfg = PlayerVisualConfig;
     const rows = cfg.DIRECTION_ROW_INDEX;

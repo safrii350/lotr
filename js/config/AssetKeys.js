@@ -9,4 +9,10 @@ export const AssetKeys = Object.freeze({
   playerWalkAttack: 'player-walk-attack',
   playerHurt: 'player-hurt',
   playerDeath: 'player-death',
+  slime2Idle: 'slime2-idle',
+  slime2Walk: 'slime2-walk',
+  slime2Run: 'slime2-run',
+  slime2Attack: 'slime2-attack',
+  slime2Hurt: 'slime2-hurt',
+  slime2Death: 'slime2-death',
 });
