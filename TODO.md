@@ -6,7 +6,7 @@ Geordnete Erweiterungen, um **Cyber-Nexus-Proto** zu einem vollwertigen Cyberpun
 
 - [ ] **Charakter-Sprites:** Neon/Cyberpunk-Idle/Walk-Sheets; `PlayerVisualConfig.js` nur auf neue Pfade/Frame-Counts trimmen.
 - [ ] **Umgebung:** Neues Tileset (Stadt, Neon, Schatten); `map.json` + ggf. Editor-Workflow (Tiled-Export optional) dokumentieren.
-- [ ] **UI-Skin:** Wii-Rahmen durch „Arcade-Terminal“-HUD ersetzen oder variantenfähig machen (CSS-Themes).
+- [ ] **UI-Skin:** Weitere Themes optional (CSS-Varianten / Tokens).
 
 ## Phase 2 — Welt & Interaktion
 

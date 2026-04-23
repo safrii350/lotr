@@ -1,0 +1,213 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+ * Windows-95/2000-inspiriertes Layout: eckige Kanten, harter Schatten,
+ * Graustufen (schwarz / weiß / grau). Schrift: DotGothic16.
+ */
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  font-family: 'DotGothic16', ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  color: #0a0a0a;
+  background: #2b2b2b;
+}
+
+.app-page {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem 2.5rem;
+  background: #2b2b2b;
+}
+
+.app-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+}
+
+/** Außenfenster: erhabener Rahmen + eckiger Kastenschatten */
+.win-dialog {
+  width: 100%;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #0a0a0a #0a0a0a #ffffff;
+  box-shadow:
+    4px 4px 0 #000000,
+    8px 8px 0 #1a1a1a;
+}
+
+.win-dialog-client {
+  padding: 10px 10px 0;
+  display: flex;
+  justify-content: center;
+  background: #c0c0c0;
+}
+
+/** Versenktes Spielfenster (klassisch „Sunken“) */
+.win-viewport {
+  display: block;
+  width: 592px;
+  height: 480px;
+  max-width: 100%;
+  overflow: hidden;
+  background: #000000;
+  border: 2px solid;
+  border-color: #0a0a0a #ffffff #ffffff #0a0a0a;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+
+.win-viewport canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/** Bereich unter dem Spiel: eigener Block im gleichen Fenster */
+.win-footer {
+  margin-top: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #c0c0c0;
+  border-top: 2px solid;
+  border-color: #808080 #c0c0c0 #c0c0c0 #808080;
+}
+
+.win-footer-panel {
+  flex: 1 1 200px;
+  min-width: 0;
+  margin: 0;
+  padding: 8px 10px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #0a0a0a #ffffff #ffffff #0a0a0a;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+
+.win-footer-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #0a0a0a;
+  border-bottom: 1px solid #808080;
+  padding-bottom: 6px;
+}
+
+.win-control-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.win-control-list li {
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.win-control-list li:last-child {
+  margin-bottom: 0;
+}
+
+.win-control-desc {
+  color: #0a0a0a;
+}
+
+.win-kbd {
+  display: inline-block;
+  min-width: 1.5rem;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: center;
+  color: #0a0a0a;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #0a0a0a #0a0a0a #ffffff;
+  box-shadow: 1px 1px 0 #000000;
+}
+
+.win-footer-aside {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 10px;
+  min-width: 11rem;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #0a0a0a #0a0a0a #ffffff;
+}
+
+.win-clock {
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+  color: #0a0a0a;
+  letter-spacing: 0.06em;
+}
+
+.win-link {
+  font-size: 12px;
+  color: #0a0a0a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+  text-align: right;
+  max-width: 16rem;
+}
+
+.win-link:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.win-link:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .app-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .win-dialog {
+    box-shadow: 3px 3px 0 #000000;
+  }
+
+  .win-footer {
+    flex-direction: column;
+  }
+
+  .win-footer-aside {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .win-link {
+    text-align: left;
+    max-width: none;
+  }
+}

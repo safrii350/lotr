@@ -4,74 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cyber-Nexus-Proto</title>
-    <link rel="stylesheet" href="css/wii-frame.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/shell.css" />
   </head>
   <body>
-    <div class="wii-shell">
-      <div class="wii-bg-glow" aria-hidden="true"></div>
-
-      <main class="wii-main">
-        <div class="wii-stage-row">
-          <div class="wii-channel-frame" aria-label="Spielfenster">
-            <div class="wii-channel-gloss" aria-hidden="true"></div>
-            <div class="wii-channel-inner">
-              <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
-            </div>
+    <div class="app-page">
+      <div class="app-column">
+        <div class="win-dialog" role="application" aria-label="Cyber-Nexus-Proto">
+          <div class="win-dialog-client">
+            <div id="game-root" class="win-viewport" aria-label="Spielfläche"></div>
           </div>
 
-          <aside class="wii-system-msg" aria-labelledby="wii-controls-heading">
-            <div class="wii-system-msg-inner">
-              <div class="wii-msg-header-pill">
-                <h2 id="wii-controls-heading" class="wii-msg-header-text">Steuerung</h2>
-              </div>
-              <div class="wii-msg-body">
-                <p class="wii-msg-lead">So bewegst du die Figur:</p>
-                <ul class="wii-msg-list">
-                  <li>
-                    <kbd class="wii-kbd">W</kbd>
-                    <kbd class="wii-kbd">A</kbd>
-                    <kbd class="wii-kbd">S</kbd>
-                    <kbd class="wii-kbd">D</kbd>
-                    <span class="wii-msg-desc">Laufen</span>
-                  </li>
-                  <li>
-                    <span class="wii-msg-desc">oder Pfeiltasten</span>
-                  </li>
-                  <li>
-                    <span class="wii-msg-desc">Zwei Richtungen gleichzeitig für diagonal</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </main>
+          <footer class="win-footer">
+            <section class="win-footer-panel" aria-labelledby="controls-heading">
+              <h2 id="controls-heading" class="win-footer-title">Steuerung</h2>
+              <ul class="win-control-list">
+                <li>
+                  <kbd class="win-kbd">W</kbd>
+                  <kbd class="win-kbd">A</kbd>
+                  <kbd class="win-kbd">S</kbd>
+                  <kbd class="win-kbd">D</kbd>
+                  <span class="win-control-desc">Laufen</span>
+                </li>
+                <li><span class="win-control-desc">Alternativ: Pfeiltasten</span></li>
+                <li>
+                  <span class="win-control-desc">Zwei Richtungen gleichzeitig für diagonal</span>
+                </li>
+              </ul>
+            </section>
 
-      <footer class="wii-dock">
-        <div class="wii-dock-inner">
-          <div class="wii-dock-buttons" role="toolbar" aria-label="Baustellen-Hinweise">
-            <span class="wii-orb" title="Under construction">🚧</span>
-            <span class="wii-orb" title="Under construction">🏗️</span>
-            <span class="wii-orb" title="Under construction">👷</span>
-            <span class="wii-orb" title="Under construction">🔧</span>
-            <span class="wii-orb" title="Under construction">⚠️</span>
-          </div>
-          <time class="wii-clock" id="wii-clock" datetime="">--:--</time>
+            <div class="win-footer-aside">
+              <time class="win-clock" id="app-clock" datetime="">--:--</time>
+              <a
+                class="win-link"
+                href="https://github.com/safrii350/lotr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/safrii350/lotr
+              </a>
+            </div>
+          </footer>
         </div>
-      </footer>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
     <script type="module" src="js/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const clockEl = document.getElementById('wii-clock');
+        const clockEl = document.getElementById('app-clock');
         if (!clockEl) return;
         const tick = () => {
           const now = new Date();
           clockEl.textContent = now.toLocaleTimeString('de-DE', {
             hour: '2-digit',
             minute: '2-digit',
+            second: '2-digit',
           });
           clockEl.dateTime = now.toISOString();
         };

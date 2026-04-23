@@ -4,6 +4,14 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — UI: Windows-95/2000 statt Wii
+
+**Entscheidung:** Themenwechsel auf **schwarz/weiß/grau**, **eckige Kanten**, **blockigen Versatz-Schatten** (keine runden Wii-Formen). Spiel **mittig**; **Steuerung**, **Uhr** (de-DE, mit Sekunden) und **GitHub-Verlinkung** [`https://github.com/safrii350/lotr`](https://github.com/safrii350/lotr) im **unteren Bereich** desselben „Fensters“. Google Font **DotGothic16** eingebunden.
+
+**Dateien:** `css/shell.css` (neu), `css/wii-frame.css` entfernt, `index.html` angepasst.
+
+---
+
 ## 2026-04-23 — Steuerung als Wii-Systemmeldung
 
 **Entscheidung:** Steuerungshinweise in einem **eigenen Panel rechts** neben dem Spiel. Optik angelehnt an Wii-Systemdialoge: stark abgerundeter Kasten, radialer/linearer Gloss, **Pill-Header „Steuerung“** mit **Cyan-Rand** und Glow — **ohne** unteren Action-Button. Inhalt: WASD, Pfeiltasten, Diagonal-Hinweis; `<aside>` + Überschrift für Barrierefreiheit.
@@ -14,7 +22,7 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ## 2026-04-23 — Spielfenster 592×480
 
-**Entscheidung:** Phaser-Canvas und `.wii-screen` von **800×600** auf **592×480** verkleinert (`GameConfig.js`, `css/wii-frame.css`). README angepasst. Breakpoint für horizontales Scrollen der Shell: ~640px Breite.
+**Entscheidung:** Phaser-Canvas von **800×600** auf **592×480** verkleinert (`GameConfig.js`, Shell-CSS). README angepasst.
 
 ---
 
@@ -52,8 +60,8 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ### Änderungen (Dateien)
 
-- `index.html` — Wii-ähnlicher Rahmen, Container für Spielfläche (592×480), Modul-Einstieg.
-- `css/wii-frame.css` — Rahmen/„Console“-Optik.
+- `index.html` — Shell, Container für Spielfläche (592×480), Modul-Einstieg.
+- `css/shell.css` — Fenster-/Panel-Optik (aktuell Retro-Desktop).
 - `js/main.js` — Phaser-Bootstrap, Szenenliste.
 - `js/config/GameConfig.js` — Auflösung, Physik, Pixeltreu.
 - `js/config/AssetKeys.js` — Asset-Schlüssel.
@@ -72,7 +80,7 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ### Nächste sinnvolle Schritte (kurz)
 
-- Audio, UI-HUD im Wii-Rahmen, Speicherstände.
+- Audio, UI-HUD, Speicherstände.
 - Dialog-/Quest-System (siehe `TODO.md`).
 
 ---

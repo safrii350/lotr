@@ -1,6 +1,6 @@
 # Cyber-Nexus-Proto
 
-Top-Down-Pixel-RPG-Prototyp mit **Phaser 3** (HTML5/CSS/ES-Module). Die Spielfläche ist **592×480**; daneben zeigt ein **Wii-ähnliches Infofeld** die Steuerung (Systemmeldungs-Optik, ohne Button). Rahmen und Layout: `index.html` + `css/wii-frame.css`.
+Top-Down-Pixel-RPG-Prototyp mit **Phaser 3** (HTML5/CSS/ES-Module). Die Spielfläche ist **592×480**, zentriert; **darunter** (eigenes Panel im gleichen Fenster) Steuerungshinweise, Uhrzeit und Link zum Repo [**safrii350/lotr**](https://github.com/safrii350/lotr). Layout: Windows-95/2000-inspiriert (eckige Kanten, Graustufen), Schrift **DotGothic16** — `index.html` + `css/shell.css`.
 
 ## Voraussetzungen
 
