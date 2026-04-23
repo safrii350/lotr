@@ -4,6 +4,12 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — HP-Leiste (UI)
+
+**Entscheidung:** `HealthBar` in `js/ui/HealthBar.js`: Container mit `scrollFactor` 0, oben links (220×28, Rand `#000000`, fehlend `#990000`, aktuell `#00FF00`, Text weiß `HP : a / b`). `GameScene.playerHp` Standard **100/100**; **H** zieht 15 HP ab und aktualisiert die Leiste, **J** setzt HP auf 0.
+
+---
+
 ## 2026-04-23 — Hurt & Death (Sprites + API)
 
 **Entscheidung:** `Swordsman_lvl1_Hurt_with_shadow.png` (320×256, **5** Frames/Zeile), `Swordsman_lvl1_Death_with_shadow.png` (448×256, **7** Frames/Zeile), gleiche 4 Richtungen. `triggerHurt()` (kurz, stehend, blockiert nicht Tod; **nicht** während `_attacking`), `triggerDeath()` (entfernt `animationcomplete`-Listener, bricht Zustände ab, Ende: `anims.pause()`). Prototyp-Tasten **H** / **J** in `GameScene`. Getter `isDead`.

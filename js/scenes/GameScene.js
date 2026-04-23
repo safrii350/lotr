@@ -1,6 +1,7 @@
 import { AssetKeys } from '../config/AssetKeys.js';
 import { CustomMapLoader } from '../map/CustomMapLoader.js';
 import { PlayerController } from '../entities/PlayerController.js';
+import { HealthBar } from '../ui/HealthBar.js';
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -40,6 +41,9 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.sprite, true, 0.12, 0.12);
     this.cameras.main.setZoom(1);
 
+    this.playerHp = { current: 100, max: 100 };
+    this.healthBar = new HealthBar(this, 10, 10, 220, 28);
+
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys('W,S,A,D');
     this.shiftKey = this.input.keyboard.addKey(
@@ -51,10 +55,18 @@ export class GameScene extends Phaser.Scene {
   }
 
   update() {
-    if (Phaser.Input.Keyboard.JustDown(this.hKey)) {
-      this.player.triggerHurt();
+    if (Phaser.Input.Keyboard.JustDown(this.hKey) && !this.player.isDead) {
+      this.playerHp.current = Math.max(0, this.playerHp.current - 15);
+      this.healthBar.setHp(this.playerHp.current, this.playerHp.max);
+      if (this.playerHp.current <= 0) {
+        this.player.triggerDeath();
+      } else {
+        this.player.triggerHurt();
+      }
     }
-    if (Phaser.Input.Keyboard.JustDown(this.jKey)) {
+    if (Phaser.Input.Keyboard.JustDown(this.jKey) && !this.player.isDead) {
+      this.playerHp.current = 0;
+      this.healthBar.setHp(0, this.playerHp.max);
       this.player.triggerDeath();
     }
     this.player.update(this.cursors, this.wasd, this.shiftKey, this.eKey);

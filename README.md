@@ -23,6 +23,7 @@ Dann im Browser die angezeigte URL öffnen (z. B. `http://localhost:3000`).
 | `js/config/` | Auflösung, Assets, **MapTilesetConfig**, **PlayerVisualConfig** |
 | `js/map/CustomMapLoader.js` | JSON → Phaser-Tilemap, Kollision auf `objekte` |
 | `js/entities/PlayerController.js` | WASD + Animationen |
+| `js/ui/HealthBar.js` | HP-Leiste (Screen Space, grün/rot, Text) |
 | `PROTOCOL.md` | Chronologisches Build-Protokoll |
 | `TODO.md` | Roadmap Richtung Cyberpunk-Vollspiel |
 
@@ -31,7 +32,7 @@ Dann im Browser die angezeigte URL öffnen (z. B. `http://localhost:3000`).
 - **WASD** oder **Pfeiltasten** — achtparallele Bewegung mit normalisierten Diagonalen.
 - **Umschalttaste (Shift)** gedrückt halten + Richtung — **Rennen** (anderes Sprite, höhere Geschwindigkeit).
 - **E** — **Angriff** (einmal abspielen). **Stehend:** keine Bewegung während der Animation. **Gehen / Rennen:** Walk- bzw. Run-Attack-Sprite, du kannst **weiterlaufen oder rennen** (Geschwindigkeit wie ohne Angriff, inkl. Shift). Varianten: Idle-Attack (8 Frames), Walk-Attack 384×256 / 6 Frames, Run-Attack (8 Frames).
-- **H** / **J** — Prototyp-Test: **Hurt** (320×256, 5 Frames/Zeile) bzw. **Death** (448×256, 7 Frames/Zeile); in der Szene auch `player.triggerHurt()` / `triggerDeath()` nutzbar. Tod bricht Steuerung ab und hält das letzte Frame; kein Respawn in dieser Szene.
+- **H** / **J** — Prototyp-Test: **Hurt** (−15 HP, 320×256, 5 Frames/Zeile) bzw. **Death** (HP auf 0); **HP-Leiste** oben links (100/100, dynamischer grüner Anteil). In Code: `healthBar.setHp(current, max)`, `playerHp` in `GameScene`.
 
 ## Karte & Kollision
 
