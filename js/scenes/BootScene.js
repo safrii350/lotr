@@ -24,6 +24,22 @@ export class BootScene extends Phaser.Scene {
       frameWidth,
       frameHeight,
     });
+    this.load.spritesheet(AssetKeys.playerRun, paths.run, {
+      frameWidth,
+      frameHeight,
+    });
+    this.load.spritesheet(AssetKeys.playerAttack, paths.attack, {
+      frameWidth,
+      frameHeight,
+    });
+    this.load.spritesheet(AssetKeys.playerRunAttack, paths.runAttack, {
+      frameWidth,
+      frameHeight,
+    });
+    this.load.spritesheet(AssetKeys.playerWalkAttack, paths.walkAttack, {
+      frameWidth,
+      frameHeight,
+    });
   }
 
   create() {

@@ -24,7 +24,11 @@ export class GameScene extends Phaser.Scene {
       startX,
       startY,
       AssetKeys.playerIdle,
-      AssetKeys.playerWalk
+      AssetKeys.playerWalk,
+      AssetKeys.playerRun,
+      AssetKeys.playerAttack,
+      AssetKeys.playerRunAttack,
+      AssetKeys.playerWalkAttack
     );
     this.player.sprite.setDepth(5);
 
@@ -36,9 +40,13 @@ export class GameScene extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasd = this.input.keyboard.addKeys('W,S,A,D');
+    this.shiftKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SHIFT
+    );
+    this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
   }
 
   update() {
-    this.player.update(this.cursors, this.wasd);
+    this.player.update(this.cursors, this.wasd, this.shiftKey, this.eKey);
   }
 }

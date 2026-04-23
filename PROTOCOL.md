@@ -4,6 +4,38 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — Walk + Attack (E beim Gehen)
+
+**Entscheidung:** `Swordsman_lvl1_Walk_Attack_with_shadow.png` (384×256, **6** Frames/Zeile wie Walk). **E** bei **Bewegung ohne Shift** → `_beginWalkAttack`; Priorität: Rennen (`Shift`) > Gehen > stehend.
+
+**Dateien:** `PlayerVisualConfig.js` (`walkAttack`, `walkAttackFrameCount`/`Rate`), `AssetKeys.playerWalkAttack`, `BootScene`, `GameScene`, `PlayerController`, `index.html`, `README.md`.
+
+---
+
+## 2026-04-23 — Run + Attack (E beim Rennen)
+
+**Entscheidung:** `Swordsman_lvl1_Run_Attack_with_shadow.png` (512×256, 8 Frames/Zeile, 4 Zeilen). Wenn **Shift + Bewegung** (Rennen) und **E** (`JustDown`) → `_beginRunAttack`, sonst weiter **stehender Angriff**. Gleiche Physik: Stillstand bis `animationcomplete`, dann Idle.
+
+**Dateien:** `PlayerVisualConfig.js` (`runAttack`, `runAttackFrameCount`/`Rate`), `AssetKeys.playerRunAttack`, `BootScene`, `GameScene`, `PlayerController`, `index.html`, `README.md`.
+
+---
+
+## 2026-04-23 — Stehender Angriff (E)
+
+**Entscheidung:** `Swordsman_lvl1_attack_with_shadow.png` (512×256, **8** Frames/Zeile, 4 Zeilen wie Run). Taste **E** (`JustDown`) startet Angriff in aktueller **Blickrichtung** (bei Bewegung aus Vektor, sonst `_lastDir`). **Geschwindigkeit 0** bis `animationcomplete`, dann zurück zu Idle. Animation `repeat: 0`.
+
+**Dateien:** `PlayerVisualConfig.js`, `AssetKeys.js`, `BootScene.js`, `GameScene.js` (`eKey`), `PlayerController.js`, `index.html`, `README.md`.
+
+---
+
+## 2026-04-23 — Rennen (Shift + Richtung)
+
+**Entscheidung:** `Swordsman_lvl1_Run_with_shadow.png` (512×256, **8×64** Frames, 4 Zeilen wie Walk/Idle) geladen; Animationen `player-run-*`. **Shift** + Bewegungstasten → Modus `run` mit `runSpeed` (250), sonst Walk. `PlayerController.update` erhält `shiftKey` (`KeyCodes.SHIFT`).
+
+**Dateien:** `PlayerVisualConfig.js`, `AssetKeys.js`, `BootScene.js`, `GameScene.js`, `PlayerController.js`, `index.html` (Hinweis), `README.md`.
+
+---
+
 ## 2026-04-23 — UI: Windows-95/2000 statt Wii
 
 **Entscheidung:** Themenwechsel auf **schwarz/weiß/grau**, **eckige Kanten**, **blockigen Versatz-Schatten** (keine runden Wii-Formen). Spiel **mittig**; **Steuerung**, **Uhr** (de-DE, mit Sekunden) und **GitHub-Verlinkung** [`https://github.com/safrii350/lotr`](https://github.com/safrii350/lotr) im **unteren Bereich** desselben „Fensters“. Google Font **DotGothic16** eingebunden.

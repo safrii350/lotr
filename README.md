@@ -29,6 +29,8 @@ Dann im Browser die angezeigte URL öffnen (z. B. `http://localhost:3000`).
 ## Steuerung
 
 - **WASD** oder **Pfeiltasten** — achtparallele Bewegung mit normalisierten Diagonalen.
+- **Umschalttaste (Shift)** gedrückt halten + Richtung — **Rennen** (anderes Sprite, höhere Geschwindigkeit).
+- **E** — **Angriff** (einmal abspielen, bis dahin keine Bewegung). **Stehend** → Idle-Attack (8 Frames). **Gehen** (ohne Shift) → Walk-Attack, 384×256, 6 Frames/Zeile (`Swordsman_lvl1_Walk_Attack_with_shadow.png`). **Rennen** (Shift + Bewegung) → Run-Attack (8 Frames). Blickrichtung wie bei der Bewegung bzw. zuletzt idle.
 
 ## Karte & Kollision
 
