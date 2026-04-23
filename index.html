@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber-Nexus-Proto</title>
+    <link rel="stylesheet" href="css/wii-frame.css" />
+  </head>
+  <body>
+    <div class="wii-page">
+      <header class="wii-header">
+        <span class="wii-channel-label">Kanal</span>
+        <h1 class="wii-title">Cyber-Nexus-Proto</h1>
+        <span class="wii-hint">WASD · Pfeiltasten</span>
+      </header>
+
+      <main class="wii-console">
+        <div class="wii-bezel">
+          <div class="wii-power-led" aria-hidden="true"></div>
+          <div id="game-root" class="wii-screen" role="application" aria-label="Spielfläche"></div>
+        </div>
+      </main>
+
+      <footer class="wii-footer">
+        <p class="wii-footer-text">800 × 600 · Phaser 3 · Top-Down-Prototyp</p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

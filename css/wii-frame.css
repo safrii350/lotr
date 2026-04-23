@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(ellipse at 50% 20%, #6ec8ff 0%, #2a6cb0 35%, #0b2a4a 100%);
+  color: #0b1f33;
+}
+
+.wii-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+.wii-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(180deg, #f3f9ff 0%, #d0e8ff 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 18px rgba(0, 40, 80, 0.25);
+}
+
+.wii-channel-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a6aa3;
+}
+
+.wii-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #0b3d66;
+  flex: 1;
+  text-align: center;
+}
+
+.wii-hint {
+  font-size: 0.8rem;
+  color: #2a5f8f;
+  white-space: nowrap;
+}
+
+.wii-console {
+  display: flex;
+  justify-content: center;
+}
+
+.wii-bezel {
+  position: relative;
+  padding: 18px 20px 22px;
+  background: linear-gradient(145deg, #e8eef5 0%, #b8c5d6 40%, #9aaaba 100%);
+  border-radius: 18px;
+  border: 3px solid #f6f8fc;
+  box-shadow:
+    0 12px 28px rgba(0, 20, 50, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.wii-power-led {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #9cff9c, #1fa31f 60%, #0d5a0d);
+  box-shadow: 0 0 6px #3dff3d;
+}
+
+.wii-screen {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #0d1117;
+  border-radius: 6px;
+  border: 4px solid #1c2330;
+  box-shadow: inset 0 0 0 2px #000;
+}
+
+.wii-screen canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.wii-footer {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.wii-footer-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
