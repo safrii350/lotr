@@ -4,6 +4,22 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — Wii-Menü-Shell (Layout)
+
+**Status:** Außen-UI an Wii-Optik angelehnt: weiß/glossy, minimaler Blau-Rand ums Spielfenster, **kein** Kanal-Kachelraster — nur ein zentrales Spielfeld.
+
+### Entscheidungen
+
+- Unterer **Dock**-Balken mit runden „Orbs“ (wie Wii) und **Uhr** (`de-DE`, aktualisiert jede Sekunde); statt Marken-/Post-Schrift: **Baustellen-Emojis** (🚧 🏗️ 👷 🔧 ⚠️) als visueller „Under construction“-Hinweis.
+- Kleines Inline-Skript nur für die Uhr (keine globalen Variablen; Listener auf `DOMContentLoaded`).
+
+### Dateien
+
+- `index.html` — neue Struktur `.wii-shell`, Kanal-Rahmen, Dock, Uhr-Skript.
+- `css/wii-frame.css` — neues Styling (Glanz, Blau-Akzent, Dock, Orbs).
+
+---
+
 ## 2026-04-23 — Initialisierung & Kern-Gameplay
 
 **Status:** Prototyp spielbar (Top-Down, WASD, Tilemap-Kollision, Idle/Walk × 4 Richtungen).
