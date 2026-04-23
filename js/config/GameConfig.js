@@ -1,6 +1,6 @@
 export const GameConfig = Object.freeze({
-  width: 800,
-  height: 600,
+  width: 592,
+  height: 480,
   backgroundColor: '#1a1a24',
   physics: {
     default: 'arcade',

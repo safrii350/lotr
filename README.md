@@ -1,6 +1,6 @@
 # Cyber-Nexus-Proto
 
-Top-Down-Pixel-RPG-Prototyp mit **Phaser 3** (HTML5/CSS/ES-Module). Die Spielfläche ist **800×600** und sitzt in einem grafisch an eine Wii-Konsole erinnernden Rahmen (`index.html` + `css/wii-frame.css`).
+Top-Down-Pixel-RPG-Prototyp mit **Phaser 3** (HTML5/CSS/ES-Module). Die Spielfläche ist **592×480** und sitzt in einem grafisch an eine Wii-Konsole erinnernden Rahmen (`index.html` + `css/wii-frame.css`).
 
 ## Voraussetzungen
 

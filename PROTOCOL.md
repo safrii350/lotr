@@ -4,6 +4,12 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ---
 
+## 2026-04-23 — Spielfenster 592×480
+
+**Entscheidung:** Phaser-Canvas und `.wii-screen` von **800×600** auf **592×480** verkleinert (`GameConfig.js`, `css/wii-frame.css`). README angepasst. Breakpoint für horizontales Scrollen der Shell: ~640px Breite.
+
+---
+
 ## 2026-04-23 — Wii-Menü-Shell (Layout)
 
 **Status:** Außen-UI an Wii-Optik angelehnt: weiß/glossy, minimaler Blau-Rand ums Spielfenster, **kein** Kanal-Kachelraster — nur ein zentrales Spielfeld.
@@ -38,7 +44,7 @@ Chronologische Dokumentation von Änderungen, Entscheidungen und Build-Status.
 
 ### Änderungen (Dateien)
 
-- `index.html` — Wii-ähnlicher Rahmen, Container für 800×600-Canvas, Modul-Einstieg.
+- `index.html` — Wii-ähnlicher Rahmen, Container für Spielfläche (592×480), Modul-Einstieg.
 - `css/wii-frame.css` — Rahmen/„Console“-Optik.
 - `js/main.js` — Phaser-Bootstrap, Szenenliste.
 - `js/config/GameConfig.js` — Auflösung, Physik, Pixeltreu.
